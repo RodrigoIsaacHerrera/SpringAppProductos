@@ -3,7 +3,13 @@ package com.tata.productos.app.SpringAppProductos.web;
 import com.tata.productos.app.SpringAppProductos.core.model.ProductoDTO;
 import com.tata.productos.app.SpringAppProductos.core.model.ProductoRepositoryDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -18,7 +24,7 @@ public class RestControlador {
         return this.dao.findAll();
 
     }
-    @PostMapping("/Productos/RegistrarProducto")
+    @PostMapping("/productos/registrarProducto")
     public boolean addProducto(@RequestBody ProductoDTO nuevo){
         if(!this.dao.existsById(nuevo.getId())) {
             this.dao.save(nuevo);
@@ -26,12 +32,18 @@ public class RestControlador {
         }
         return false;
     }
-    @DeleteMapping("/EliminarProducto/{id}")
+    @PutMapping("/productos/actualizarProducto")
+    public boolean updateProducto(@RequestBody ProductoDTO modificado){
+        if(this.dao.existsById(modificado.getId())){
+            this.dao.save(modificado);
+            return true;
+        }
+        return false;
+    }
+    @DeleteMapping("/productos/eliminarProducto/{id}")
     public boolean deleteProducto(@PathVariable Integer id){
         this.dao.deleteById(id);
         return !this.dao.existsById(id);
     }
-
-
 
 }
