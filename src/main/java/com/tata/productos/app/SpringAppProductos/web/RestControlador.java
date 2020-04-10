@@ -20,9 +20,7 @@ public class RestControlador {
 
     @GetMapping("/products")
     public List<ProductoDTO> getListaProductos(){
-
         return this.dao.findAll();
-
     }
     @GetMapping("/products/{name}")
     public List<ProductoDTO> getProductoByName(@PathVariable String name){
