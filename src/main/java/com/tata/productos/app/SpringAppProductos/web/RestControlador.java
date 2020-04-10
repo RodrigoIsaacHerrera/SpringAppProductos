@@ -22,13 +22,13 @@ public class RestControlador {
     public List<ProductoDTO> getListaProductos(){
         return this.dao.findAll();
     }
-    @GetMapping("/products/{name}")
+    @GetMapping("/products/name/{name}")
     public List<ProductoDTO> getProductoByName(@PathVariable String name){
         this.dao.findByName(name).forEach(x -> System.out.println("el elemento fue encontrado \n" + x));
         return this.dao.findByName(name);
     }
-    @GetMapping("/products/{id}")
-    public String getProductoById(@PathVariable int id){
+    @GetMapping("/products/byid/{id}")
+    public String getProductoById(@PathVariable Integer id){
         this.dao.findById(id).ifPresent(x -> System.out.println("el elemento fue encontrado \n" + x));
         return this.dao.findById(id).toString();
     }
