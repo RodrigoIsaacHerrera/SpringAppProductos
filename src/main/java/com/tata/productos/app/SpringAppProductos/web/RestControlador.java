@@ -54,7 +54,7 @@ public class RestControlador {
     @DeleteMapping("/products/deleteProduct/{id}")
     public boolean deleteProducto(@PathVariable Integer id){
         this.dao.deleteById(id);
-        
+
         return true;
     }
 
