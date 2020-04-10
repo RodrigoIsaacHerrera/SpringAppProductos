@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ProductoRepositoryDAO extends JpaRepository<ProductoDTO, Integer> {
 
-    List<ProductoDTO> findByName(String name);
-    List<ProductoDTO> findByType(String type);
+    List<ProductoDTO> findByName(String name) throws Exception;
+    List<ProductoDTO> findByType(String type) throws Exception;
 
 }
