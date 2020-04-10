@@ -18,21 +18,33 @@ public class RestControlador {
     @Autowired
     ProductoRepositoryDAO dao;
 
-    @GetMapping("/Productos")
+    @GetMapping("/products")
     public List<ProductoDTO> getListaProductos(){
 
         return this.dao.findAll();
 
     }
-    @PostMapping("/productos/registrarProducto")
+    @GetMapping("/products/{name}")
+    public List<ProductoDTO> getProductoByName(@PathVariable String name){
+        this.dao.findByName(name).forEach(x -> System.out.println("el elemento fue encontrado \n" + x));
+        return this.dao.findByName(name);
+    }
+    @GetMapping("/products/{id}")
+    public String getProductoById(@PathVariable int id){
+        this.dao.findById(id).ifPresent(x -> System.out.println("el elemento fue encontrado \n" + x));
+        return this.dao.findById(id).toString();
+    }
+
+    @PostMapping("/products/registerProduct")
     public boolean addProducto(@RequestBody ProductoDTO nuevo){
+
         if(!this.dao.existsById(nuevo.getId())) {
             this.dao.save(nuevo);
             return true;
         }
         return false;
     }
-    @PutMapping("/productos/actualizarProducto")
+    @PutMapping("/products/updateProduct")
     public boolean updateProducto(@RequestBody ProductoDTO modificado){
         if(this.dao.existsById(modificado.getId())){
             this.dao.save(modificado);
@@ -40,7 +52,7 @@ public class RestControlador {
         }
         return false;
     }
-    @DeleteMapping("/productos/eliminarProducto/{id}")
+    @DeleteMapping("/products/deleteProduct/{id}")
     public boolean deleteProducto(@PathVariable Integer id){
         this.dao.deleteById(id);
         return !this.dao.existsById(id);

@@ -32,8 +32,6 @@ public class SpringAppProductosApplication implements CommandLineRunner {
 		repository.save(new ProductoDTO(2,"Manual de lambdas Java 8, los desafios me encantan", "Book"));
 		repository.save(new ProductoDTO(3,"El principio de mejor entregar algo que nada", "Manual"));
 
-		System.out.println("\nfindAll()");
-		repository.findAll().forEach(x -> System.out.println("el elemento fue encontrado \n" + x));
 
 		System.out.println("\nfindById(1)");
 		repository.findById(1).ifPresent(x -> System.out.println("el elemento fue encontrado \n" + x));
@@ -46,6 +44,9 @@ public class SpringAppProductosApplication implements CommandLineRunner {
 
 		System.out.println("\nfindByName('Xiaomi 344')");
 		repository.findByName("Xiaomi 344").forEach( x -> System.out.println("el elemento fue encontrado \n" + x));
+
+		System.out.println("\nfindAll()");
+		repository.findAll().forEach(x -> System.out.println(x));
 
 
 	}
