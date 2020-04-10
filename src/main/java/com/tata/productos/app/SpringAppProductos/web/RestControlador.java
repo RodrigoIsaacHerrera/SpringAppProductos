@@ -45,6 +45,7 @@ public class RestControlador {
     @PutMapping("/products/updateProduct")
     public boolean updateProducto(@RequestBody ProductoDTO modificado){
         if(this.dao.existsById(modificado.getId())){
+
             this.dao.save(modificado);
             return true;
         }
@@ -53,7 +54,8 @@ public class RestControlador {
     @DeleteMapping("/products/deleteProduct/{id}")
     public boolean deleteProducto(@PathVariable Integer id){
         this.dao.deleteById(id);
-        return !this.dao.existsById(id);
+        
+        return true;
     }
 
 }
