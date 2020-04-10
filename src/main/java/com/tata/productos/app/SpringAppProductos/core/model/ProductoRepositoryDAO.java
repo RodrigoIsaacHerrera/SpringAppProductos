@@ -7,5 +7,7 @@ public interface ProductoRepositoryDAO extends JpaRepository<ProductoDTO, Intege
 
     List<ProductoDTO> findByName(String name);
     List<ProductoDTO> findByType(String type);
+    List<ProductoDTO> findAll();
+
 
 }
