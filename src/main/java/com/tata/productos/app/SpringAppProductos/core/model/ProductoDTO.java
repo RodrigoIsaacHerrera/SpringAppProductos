@@ -3,23 +3,25 @@ package com.tata.productos.app.SpringAppProductos.core.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "productos")
 public class ProductoDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "nombre")
-    private String  nombre;
-    @Column(name = "tipo")
-    private String  tipo;
-    //CONSTRUCTOR
+    private String  name;
+    private String  type;
+    //CONSTRUCTORS
+
+    public ProductoDTO() {
+    }
+
     public ProductoDTO(Integer id, String nombre, String tipo) {
         this.id = null;
-        this.nombre = nombre;
-        this.tipo = tipo;
+        this.name = nombre;
+        this.type = tipo;
     }
     //GETTERS AND SETTERS
+
 
     public Integer getId() {
         return id;
@@ -29,19 +31,28 @@ public class ProductoDTO {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getType() {
+        return type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductoDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }
