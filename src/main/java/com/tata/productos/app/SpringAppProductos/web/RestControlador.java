@@ -23,6 +23,8 @@ public class RestControlador {
     public List<ProductoDTO> getListaProductos(){
         return this.dao.findAll();
     }
+    @GetMapping("/products/type/{type}")
+    public List<ProductoDTO> getListaProductos(@PathVariable String type){ return this.dao.findByType(type);}
     @GetMapping("/products/name/{name}")
     public ProductoDTO getProductoByName(@PathVariable String name){
         this.dao.findByName(name).ifPresent(x -> System.out.println("el elemento fue encontrado \n" + x));
