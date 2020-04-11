@@ -38,12 +38,12 @@ public class SpringAppProductosApplication implements CommandLineRunner {
 		System.out.println("\nfindByType('Smart Phone')");
 		repository.findByType("Smart Phone").forEach( x -> System.out.println("el elemento fue encontrado \n" + x));
 		System.out.println("\nfindByName('El principio de mejor entregar algo que nada')");
-		repository.findByName("El principio de mejor entregar algo que nada").forEach(x -> System.out.println("el elemento fue encontrado \n" + x));
+		repository.findByName("El principio de mejor entregar algo que nada").ifPresent(x -> System.out.println("el elemento fue encontrado \n" + x));
 		System.out.println("\nfindById(3)");
 		repository.findById(3).ifPresent(x -> System.out.println(x));
 
 		System.out.println("\nfindByName('Xiaomi 344')");
-		repository.findByName("Xiaomi 344").forEach( x -> System.out.println("el elemento fue encontrado \n" + x));
+		repository.findByName("Xiaomi 344").ifPresent( x -> System.out.println("el elemento fue encontrado \n" + x));
 
 		System.out.println("\nfindAll()");
 		repository.findAll().forEach(x -> System.out.println(x));
