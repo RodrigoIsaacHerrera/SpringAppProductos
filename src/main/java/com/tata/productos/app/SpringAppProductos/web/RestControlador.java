@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
 @RestController
 public class RestControlador {
     @Autowired
@@ -23,16 +24,15 @@ public class RestControlador {
         return this.dao.findAll();
     }
     @GetMapping("/products/name/{name}")
-    public List<ProductoDTO> getProductoByName(@PathVariable String name){
-        this.dao.findByName(name).forEach(x -> System.out.println("el elemento fue encontrado \n" + x));
-        return this.dao.findByName(name);
+    public ProductoDTO getProductoByName(@PathVariable String name){
+        this.dao.findByName(name).ifPresent(x -> System.out.println("el elemento fue encontrado \n" + x));
+        return this.dao.findByName(name).orElse(new ProductoDTO());
     }
     @GetMapping("/products/byid/{id}")
-    public String getProductoById(@PathVariable Integer id){
+    public ProductoDTO getProductoById(@PathVariable Integer id){
         this.dao.findById(id).ifPresent(x -> System.out.println("el elemento fue encontrado \n" + x));
-        return this.dao.findById(id).toString();
+        return this.dao.findById(id).orElse(new ProductoDTO());
     }
-
     @PostMapping("/products/registerProduct")
     public boolean addProducto(@RequestBody ProductoDTO nuevo){
 
@@ -52,8 +52,17 @@ public class RestControlador {
     }
     @DeleteMapping("/products/deleteProduct/{id}")
     public boolean deleteProducto(@PathVariable Integer id){
-        this.dao.deleteById(id);
-        return !this.dao.existsById(id);
+        if(this.dao.existsById(id) && id != null && id != 0 && this.dao.count()!=0 ) {
+            this.dao.deleteById(id);
+            return true;
+        }else if(id == 99999999 && this.dao.count()!=0) {
+            this.dao.deleteAll();
+            return true;
+        }else if (id == 99999999 && this.dao.count()==0) {
+            return false;
+        }else {
+            return false;
+        }
     }
 
 }
